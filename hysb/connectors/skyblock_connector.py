@@ -16,8 +16,11 @@ class SkyblockConn:
         return Collections(data)
 
     async def election_mayor(self) -> ElectionMayorResult:
+        """Information regarding the current mayor and ongoing election in SkyBlock"""
         data = await get(self.session, utils.ELECTION_MAJOR)
-        print(data)
-        test = data
-        return ElectionMayorResult(test)
+        return ElectionMayorResult(data)
 
+    async def bazaar(self):
+        """Returns the list of products along with their sell summary, buy summary and quick status."""
+        data = await get(self.session, utils.BAZAAR)
+        return Bazaar(data)
