@@ -1,5 +1,5 @@
 # hysb-py
-A Hypixel Skyblock API Python Wrapper. Will only contain features which are required for the Marin Kitagawa Bot.
+A Hypixel Skyblock API Python Wrapper. It will only contain features which are required for the Marin Kitagawa Bot.
 This wrapper is fully written in async. Currently, there isn't a documentation. Simply read the source code, if you 
 still have any questions, create an Issue or dm me on Discord: Wambo#0800
 ## Usage
