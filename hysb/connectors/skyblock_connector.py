@@ -24,3 +24,17 @@ class SkyblockConn:
         """Returns the list of products along with their sell summary, buy summary and quick status."""
         data = await get(self.session, utils.BAZAAR)
         return Bazaar(data)
+
+    async def profile(self, profile_uuid: str):
+        """SkyBlock profile data, such as stats, objectives etc.
+        The data returned can differ depending on the players in-game API settings."""
+        # TODO Testing is needed here!
+        data = await get(self.session, utils.PROFILE_BY_UUID, f'profile={profile_uuid}')
+        return ProfileResult(data)
+
+    async def profiles(self, player_uuid: str):
+        """SkyBlock profile data, such as stats, objectives etc.
+        The data returned can differ depending on the players in-game API settings."""
+        # TODO Testing is needed here!
+        data = await get(self.session, utils.PROFILES_BY_PLAYER, f'uuid={player_uuid}')
+        return ProfileResult(data)

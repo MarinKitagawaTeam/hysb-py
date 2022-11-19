@@ -1,4 +1,4 @@
-from hysb.connectors.skyblock_connector import SkyblockConn
+from hysb.connectors import SkyblockConn, HypixelConn
 
 
 import aiohttp
@@ -49,3 +49,7 @@ class Client:
     @property
     def skyblock(self) -> SkyblockConn:
         return SkyblockConn(self.session)
+
+    @property
+    def hypixel(self) -> HypixelConn:
+        return HypixelConn(self.session)

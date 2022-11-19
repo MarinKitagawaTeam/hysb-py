@@ -2,8 +2,8 @@ import aiohttp
 import typing
 
 
-async def get(session: aiohttp.ClientSession, url: str) -> typing.Dict:
-    async with session.get(url) as resp:
+async def get(session: aiohttp.ClientSession, url: str, query: str = "") -> typing.Dict:
+    async with session.get(url + '?' + query) as resp:
         json = await resp.json()
         print(json)
         return json
