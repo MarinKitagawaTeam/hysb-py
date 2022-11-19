@@ -1,3 +1,4 @@
+import asyncio
 import aiohttp
 import hysb.utils as utils
 import logging
@@ -17,6 +18,8 @@ class Client:
     def __init__(self, key: str = None) -> None:
         self.key = key
         self._auth = {"API-Key": key}
+        #  TODO implement on_exit function to close session
+        self.session = aiohttp.ClientSession(headers=self._auth)
 
     @classmethod
     async def connect(cls, key: str = None):
@@ -33,10 +36,9 @@ class Client:
                            "MORE INFORMATION UNDER: https://api.hypixel.net/")
             return
 
-        async with aiohttp.ClientSession() as session:
-            async with session.get(utils.API_KEY_INFORMATION, headers=self._auth) as resp:
-                json = await resp.json()
+        async with self.session.get(utils.API_KEY_INFORMATION) as resp:
+            json = await resp.json()
 
         if not json['success']:
-            raise utils.InvalidApiKey("Please enter a valid API-Key. More information:"
+            raise utils.InvalidApiKey("Please enter a valid API-Key. More information: "
                                       "https://api.hypixel.net/#section/Authentication/ApiKey")
