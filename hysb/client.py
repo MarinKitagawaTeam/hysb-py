@@ -1,4 +1,6 @@
-import asyncio
+from hysb.connectors.skyblock_connector import SkyblockConn
+
+
 import aiohttp
 import hysb.utils as utils
 import logging
@@ -30,7 +32,8 @@ class Client:
         return self
 
     async def _validate_token(self):
-        """Private function to validate the API-Key"""
+        """Private function to validate the API-Key
+        I'm not adding custom models here, cuz there is no real need for them"""
         if not self.key:
             logger.warning("YOU DIDN'T PROVIDE A KEY, YOU CAN ONLY USE ENDPOINTS WHICH DON'T REQUIRE AUTHORIZATION! "
                            "MORE INFORMATION UNDER: https://api.hypixel.net/")
@@ -42,3 +45,7 @@ class Client:
         if not json['success']:
             raise utils.InvalidApiKey("Please enter a valid API-Key. More information: "
                                       "https://api.hypixel.net/#section/Authentication/ApiKey")
+
+    @property
+    def skyblock(self) -> SkyblockConn:
+        return SkyblockConn(self.session)
