@@ -1,5 +1,7 @@
 class Dungeons:
     def __init__(self, data):
+        if not data:
+            return
         #  We are adding this, to prevent a crash if hypixel adds in 2030 a new dungeon type
         self.catacombs = DungeonType(data.get('dungeon_types').get('catacombs'))
         # Not supported Yet

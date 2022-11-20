@@ -17,7 +17,7 @@ class Profile:
 
     def __init__(self, data):
         self.id = data.get('profile_id')
-        self.members = data.get('members')
+        self.members = [Member(member) for member in data.get('members')]
         self.community_upgrades = data.get('community_upgrades')
         self.cute_name = data.get('cute_name')
         self.banking = data.get('banking')

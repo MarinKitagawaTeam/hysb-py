@@ -1,6 +1,8 @@
 class Slayer:
 
     def __init__(self, data):
+        if not data:
+            return
         self.zombie = SlayerData(data.get('zombie'))
         self.spider = SlayerData(data.get('spider'))
         self.wolf = SlayerData(data.get('wolf'))
