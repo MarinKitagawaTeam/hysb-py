@@ -17,7 +17,7 @@ class Profile:
 
     def __init__(self, data):
         self.id = data.get('profile_id')
-        self.members = [Member(member) for member in data.get('members')]
+        self.members = [Member(uuid, values) for uuid, values in data.get('members').items()]
         self.community_upgrades = data.get('community_upgrades')
         self.cute_name = data.get('cute_name')
         self.banking = data.get('banking')
@@ -26,9 +26,10 @@ class Profile:
 
 class Member:
 
-    def __init__(self, data):
-        self.pets = [Pets(pet) for pet in data[0]]
-        self.fairy_exchanges = data[1]
+    def __init__(self, uuid, data):
+        self.uuid = uuid
+        self.pets = [Pets(pet) for pet in data.get('pets')]
+        self.fairy_exchanges = data.get('fairy_exchanges')
         self.dungeons = Dungeons(data.get('dungeons'))
         self.slayer = Slayer(data.get('slayer_bosses'))
         # till now not modelled
@@ -61,11 +62,13 @@ class Member:
 class Pets:
 
     def __init__(self, data):
-        self.uuid = data[0]
-        self.type = data[1]
-        self.exp = data[2]
-        self.active: bool = data[3]
-        self.tier = data[4]
-        self.held_item = data[5]
-        self.candy_used = data[6]
-        self.skin = data[7]
+        if not data:
+            return
+        self.uuid = data.get('uuid')
+        self.type = data.get('type')
+        self.exp = data.get('exp')
+        self.active: bool = data.get('active')
+        self.tier = data.get('tier')
+        self.held_item = data.get('heldItem')
+        self.candy_used = data.get('candyUsed')
+        self.skin = data.get('skin')
